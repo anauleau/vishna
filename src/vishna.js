@@ -3,9 +3,7 @@ var vishna = (function() {
 //NEED TO EDIT --->>
     var urls = {      //API urls
         news  : "http://hndroidapi.appspot.com/news/format/json/page/?appid=vishna&callback=?",
-        ask   : "http://hndroidapi.appspot.com/ask/format/json/page/?appid=vishna&callback=?",
-        newest: "http://hndroidapi.appspot.com/newest/format/json/page/?appid=vishna&callback=?",
-        best  : "http://hndroidapi.appspot.com/best/format/json/page/?appid=vishna&callback=?"
+        movies: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kkd937tfu53qzuesmc68j99k&limit=30"
     },
         thread = /^(item[?]id[=][0-9]+)/,               //regexp for HN thread posts
         w = Math.max( $(window).width() * 0.85, 960 ),  //width
@@ -44,6 +42,7 @@ var vishna = (function() {
         circles,         //data representation
         tooltip = CustomTooltip( "posts_tooltip", 240 );
 
+//initializes based on urls[category]
     function init( category ) {
         if ( urls[ category ] ) {
             load( urls[ category ], function() {
@@ -53,6 +52,8 @@ var vishna = (function() {
         }
     }
 //<<----
+
+//updates based on urls[category]
     function update( category ) {
         if ( urls[ category ] ) {
             load( urls[ category ], function() {
