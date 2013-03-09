@@ -51,7 +51,7 @@ var vishna = (function() {
             });
         }
     }
-
+//
     function update( category ) {
         if ( urls[ category ] ) {
             load( urls[ category ], function() {
@@ -67,8 +67,12 @@ var vishna = (function() {
             });
         }
     }
+//d is equal to the object that is returned by the ajax request
+//url is urls.news
 
     function load( url, callback ){
+
+
         $.getJSON(url, function( data ) {
 
             posts = data.items;
@@ -86,7 +90,7 @@ var vishna = (function() {
                 if ( thread.test(d.url) ) {
                     d.url = "http://news.ycombinator.com/" + d.url;
                 }
-
+                console.log(d);
                 return d;
             });
 
