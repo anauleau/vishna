@@ -74,7 +74,6 @@ var vishna = (function() {
 //NEED TO EDIT --->>
   function load( url, callback ){
       $.getJSON(url, function( data ) {
-        console.log(data);
         posts = data.movies;
         next = posts.pop();
 
@@ -83,13 +82,11 @@ var vishna = (function() {
               score    = parseInt( d.ratings.critics_score ),
               time     = d.release_dates.theater.split(" ").toString(),
               rank     = 1;
+
               var format = d3.time.format("%Y-%m-%d");
           d.comments = comments;
           d.score = score;
           d.time = format.parse(time);
-          console.log(d.time);
-          // time[0] * t[ time[1] ]; // number * factor
-          // console.log(d.time)
           d.url = d.links.alternate;
           return d;
         });
@@ -248,12 +245,11 @@ function legend() {
 
 //appends url for hover state
 function highlight( data, i, element ) {
+  console.log(data);
   d3.select( element ).attr( "stroke", "black" );
-return
-  var description = data.description.split("|"),
+  var description = data.critics_consensus,
     content = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
-               description[0] + "<br/>" +
-              '<a href=\"http://news.ycombinator.com/item?id='+ data.item_id +'\">' + description[1] + '</a>';
+               description + "<br/>";
 
   tooltip.showTooltip(content, d3.event);
 }
